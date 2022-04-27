@@ -12,22 +12,17 @@
 </template>
 
 <script>
-// import Vuex from "vuex";
 export default {
   data() {
     return {
-      album: { artist: "", title: "", art: "" },
+      album: { artist: "", title: "", art: "", favorite: false },
     };
   },
-  //   computed: Vuex.mapState(["albums"]),
 
   methods: {
     onSubmit() {
-      //   e.preventDefault();
-      //   this.createAlbum(this.album);
       this.$store.commit("createAlbum", this.album);
-
-      this.album = { artist: "", title: "", art: "" };
+      this.album = { artist: "", title: "", art: "", favorite: false };
     },
   },
 };
