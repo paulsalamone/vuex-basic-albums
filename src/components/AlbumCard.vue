@@ -3,9 +3,6 @@
     <img :src="require(`../assets/${album.art}.jpeg`)" :alt="album.title" />
     <h3>{{ album.title }}</h3>
     <h4>{{ album.artist }}</h4>
-    <!-- <p>Favorite: {{ album.favorite }}</p> -->
-
-    <!--  -->
     <button
       v-if="!album.favorite"
       class="like"
@@ -23,8 +20,6 @@
       💚
     </button>
     <button class="delete" @click="deleteAlbum(album)">🗑️</button>
-
-    <!--  -->
   </div>
 </template>
 
@@ -38,9 +33,6 @@ export default {
 <style scoped>
 .green {
   background-color: lightgreen;
-}
-.like:hover {
-  /* background-color: #ddd; */
 }
 
 .like:active {

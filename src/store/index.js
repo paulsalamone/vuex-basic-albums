@@ -9,6 +9,13 @@ export default new Vuex.Store({
     albums: [
       { artist: "NIN", title: "fixed", art: "nin1", favorite: false },
       {
+        artist: "Guided by Voices",
+        title: "Bee Thousand",
+        art: "gbv1",
+        favorite: true,
+      },
+
+      {
         artist: "Merzbow",
         title: "Scary Lines",
         art: "merz1",
@@ -34,7 +41,11 @@ export default new Vuex.Store({
       "yo1",
     ],
   },
-  getters: {},
+  getters: {
+    albumsLiked(state) {
+      return state.albums.filter((e) => e.favorite);
+    },
+  },
   mutations: {
     createAlbum(state, album) {
       state.albums.push(album);

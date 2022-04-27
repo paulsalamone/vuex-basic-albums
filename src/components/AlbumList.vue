@@ -2,21 +2,23 @@
   <div>
     <h2>album list:</h2>
     <AlbumFilter />
-    <div class="list-grid">
+    <div class="list-grid" v-if="all === 'all'">
       <AlbumCard
-        v-for="(album, index) in albums"
+        v-for="(album, index) in albumsAll"
         :key="index"
         :album="album"
         :toggleFavorite="toggleFavorite"
         :deleteAlbum="deleteAlbum"
       />
-      <!-- <div v-for="(album, index) in albums" :key="index">
-        <img :src="require(`../assets/${album.art}.jpeg`)" :alt="album.title" />
-        <h3>{{ album.title }}</h3>
-        <h4>{{ album.artist }}</h4>
-        <p>Favorite: {{ album.favorite }}</p>
-        <button @click="toggleFavorite">Favorite</button>
-      </div> -->
+    </div>
+    <div class="list-grid" v-else>
+      <AlbumCard
+        v-for="(album, index) in albumsLiked"
+        :key="index"
+        :album="album"
+        :toggleFavorite="toggleFavorite"
+        :deleteAlbum="deleteAlbum"
+      />
     </div>
   </div>
 </template>
@@ -26,28 +28,29 @@ import AlbumCard from "./AlbumCard.vue";
 import AlbumFilter from "./AlbumFilter.vue";
 export default {
   data: function () {
-    return {
-      //   album: {},
-    };
+    return {};
   },
   components: {
     AlbumCard,
     AlbumFilter,
   },
   computed: {
-    albums() {
+    all() {
+      return this.$store.state.toggleView;
+    },
+
+    albumsAll() {
       return this.$store.state.albums;
+    },
+    albumsLiked() {
+      return this.$store.getters.albumsLiked;
     },
   },
   methods: {
     toggleFavorite(artistName) {
-      console.log("toggle method");
-      //   console.log(this.album);
-      console.log("artName=" + artistName);
       this.$store.commit("toggleFavorite", artistName);
     },
     deleteAlbum(album) {
-      console.log("delete album method");
       this.$store.commit("deleteAlbum", album);
     },
   },
